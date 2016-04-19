@@ -1,0 +1,11 @@
+#loading-indicator {
+	position: absolute;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #F00;
+	top: 35%;
+	left: 40%;
+	opacity: 1;
+	z-index: 1;
+}

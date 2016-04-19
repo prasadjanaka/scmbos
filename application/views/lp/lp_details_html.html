@@ -1,0 +1,106 @@
+	
+    	<div style="width:1200px">
+           <?php  foreach($lp_viwe->result() as $lp_viwes){ ?>
+
+            <div style="width:600px;">
+             <table class="table">
+            	<tr>
+                <td style="pfont-size:12px;font-weight:bold"><b>LP # :</b></td>
+                <td style="font-size:11px"><?php  echo $lp_viwes->lp_number  ?></td>
+                 <td style="width:80px"></td>
+                 <td style="padding-bottom:10px;font-size:12px;font-weight:bold"><b>Delivery Block Removed Date :</b></td>
+                  <td style="padding-bottom:10px;font-size:11px"><?php echo $newDate = date("d-M-Y", strtotime($lp_viwes->delivery_block_removed_date));  ?></td>
+                </tr>
+                <tr>
+                <td style="font-size:12px;font-weight:bold"><b>Country :</b></td>
+                <td style="font-size:12px"><?php  echo $lp_viwes->country  ?></td>
+                 <td style="width:80px"></td>
+                 <td style="padding-bottom:10px;font-size:12px;font-weight:bold"><b>Delivery Block Removed Date :</b></td>
+                  <td style="padding-bottom:10px;font-size:11px"><?php echo $newDate = date("d-M-Y", strtotime($lp_viwes->delivery_block_removed_date));  ?></td>
+                </tr>
+                <tr>
+                <td style="font-size:12px;font-weight:bold"><b>Destination :</b></td>
+                <td style="font-size:12px"><?php  echo $lp_viwes->tmp_destination  ?></td>
+                 <td style="width:80px"></td>
+                 <td style="padding-bottom:10px;font-size:12px;font-weight:bold"><b>Vessel Closing Date :</b></td>
+                <td style="padding-bottom:10px;font-size:11px"><?php  echo $newDate = date("d-M-Y", strtotime($lp_viwes->vessel_closing_date));   ?></td>
+                </tr>
+                 <tr>
+                 <td></td>
+                 <td></td>
+                  <td style="width:80px"></td>
+                <td style="padding-bottom:10px;font-size:12px;font-weight:bold"><b>Cargo Ready Date :</b></td>
+                <td style="padding-bottom:10px;font-size:11px"><?php  echo $newDate = date("d-M-Y", strtotime($lp_viwes->cargo_ready_date ))   ?></td>
+                </tr>
+                <tr>
+                <td></td>
+                <td></td>
+                <td style="width:80px"></td>
+                <td style="font-size:12px;font-weight:bold"><b>Datetime Scheduled :</b></td>
+                <td style="font-size:12px"><?php echo $lp_viwes->datetime_scheduled?></td>
+                </tr>
+            </table>
+            </div>
+                  <?php } ?>
+    
+     <br />
+	
+<div style="height:30px;background-color:#CCC;font-weight:bold"><div style="padding-top:5px">More Details</div></div>
+            <table style="line-height:25px;">
+            	<thead>
+                	<tr style="">
+                    	<th align="left" style="padding-bottom:10px;width:150px">Product ID</th>
+                        <th align="left" style="padding-bottom:10px;width:500px">Description</th>
+                        <th align="left" style="padding-bottom:10px;width:10px;padding-left:0px">&nbsp;</th>
+                        <th align="left" style="padding-bottom:10px;width:100px;padding-left:0px">Qty</th>
+                        <th align="left" style="padding-bottom:10px;width:100px">Sub Customer</th>
+                    </tr>
+                </thead>
+ 
+            	<tbody >
+             
+                	<?php $total_qty=0; 
+						  $total_pids=0;
+						 foreach($lp_details_viwe->result() as $lp_details_viwes){
+						  	$total_qty=$total_qty+$lp_details_viwes->quantity;	
+							$total_pids++;
+						?>
+                
+                	<tr>
+                       <td style="font-size:14px;padding-bottom:5px;"><?php echo $lp_details_viwes->product_id ?></td>     
+                       <td style="font-size:14px;padding-bottom:5px;border-bottom:1px #000000 dotted"><?php echo $lp_details_viwes->description ?><br /><?php if($lp_details_viwes->original_product_id!=""){echo $lp_details_viwes->original_product_id; } ?>       </td>
+                       <td style="padding-left:3px;font-size:14px;padding-bottom:5px;border-bottom:1px #000000 dotted">&nbsp;</td>
+                        <td style="padding-left:3px;font-size:14px;padding-bottom:5px;border-bottom:1px #000000 dotted"><?php echo $lp_details_viwes->quantity ?></td>
+                        <td style="font-size:14px;padding-bottom:5px;border-bottom:1px #000000 dotted"><?php echo $lp_details_viwes->sub_customer ?></td>
+                    </tr>
+                   
+                    <?php } ?>
+                   
+            
+                </tbody>
+                <tfoot>
+                        <tr >
+                    	<td style="padding-bottom:80px;border-bottom:1px #000000 double"  align="left" colspan="2"> <div align="left"></div></td>
+                    	<td style="border-bottom:1px #000000 double">&nbsp;</td>
+                        <td style="border-bottom:1px #000000 double" colspan="">
+                        	
+                           <div style="padding-left:30px;text-align:left"> <label style="font-size:16px;">
+                             <?php  echo	$total_qty ?>
+                             Total Qty&nbsp;&nbsp;&nbsp;</label>
+                           </div>
+                           
+                          </td> 
+                       
+                          <td style="border-bottom:1px #000000 double" colspan=""> 
+                           <div style="text-align:left">(<label style="font-size:16px">
+                             <?php  echo $total_pids?></label>
+                            PIDS)</div>
+                        </td>
+                     
+                    </tr>
+                
+                </tfoot>
+            </table>
+                 
+
+        
